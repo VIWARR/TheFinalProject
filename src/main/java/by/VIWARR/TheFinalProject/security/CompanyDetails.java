@@ -1,11 +1,19 @@
 package by.VIWARR.TheFinalProject.security;
 
+import by.VIWARR.TheFinalProject.models.Company;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class CompanyDetails extends UserDetails {
+public class CompanyDetails implements UserDetails {
+
+    private final Company company;
+
+    public CompanyDetails(Company company) {
+        this.company = company;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -13,31 +21,35 @@ public class CompanyDetails extends UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.company.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.company.getName();
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
+    }
+
+    public Company getCompany() {
+        return this.company;
     }
 }
