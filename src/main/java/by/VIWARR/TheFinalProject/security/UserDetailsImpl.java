@@ -54,4 +54,5 @@ public class UserDetailsImpl implements UserDetails {
     public User getUser() {
         return this.user;
     }
+
 }
