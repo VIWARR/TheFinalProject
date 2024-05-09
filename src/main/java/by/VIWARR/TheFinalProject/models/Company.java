@@ -1,31 +1,33 @@
 package by.VIWARR.TheFinalProject.models;
 
-
 import jakarta.persistence.*;
 
 import java.util.Objects;
 
 @Entity
-@Table(name = "User")
-public class User {
+@Table(name = "Company")
+public class Company {
 
     @Id
-    @Column(name = "id")
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "username")
-    private String username;
+    @Column(name = "name")
+    private String name;
 
     @Column(name = "password")
     private String password;
 
-    public User() {
-    }
+    @Column(name = "description")
+    private String description;
 
-    public User(String username, String password) {
-        this.username = username;
+    public Company() {}
+
+    public Company(String name, String password, String description) {
+        this.name = name;
         this.password = password;
+        this.description = description;
     }
 
     public int getId() {
@@ -36,12 +38,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {
@@ -52,25 +54,34 @@ public class User {
         this.password = password;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id && Objects.equals(username, user.username) && Objects.equals(password, user.password);
+        Company company = (Company) o;
+        return id == company.id && Objects.equals(name, company.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, password);
+        return Objects.hash(id, name);
     }
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Company{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
