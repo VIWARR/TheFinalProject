@@ -1,7 +1,6 @@
 package by.VIWARR.TheFinalProject.config;
 
 import by.VIWARR.TheFinalProject.services.CompanyDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -21,7 +20,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    private UserDetailsService userDetailsService() {
+    public UserDetailsService userDetailsService() {
         return new CompanyDetailsService();
     }
 
@@ -36,8 +35,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated()
-                        .requestMatchers("/free").permitAll())
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/free").permitAll()
+                        .anyRequest().authenticated())
                 .build();
     }
 
