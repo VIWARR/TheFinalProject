@@ -21,9 +21,10 @@ public class CompanyDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
         Optional<Company> company = companyRepository.findByName(name);
 
-        return Optional.ofNullable(CompanyDetails(company)).orElseThrow(
-                () -> new UsernameNotFoundException(name + " is not found")
-        );
+        if (company.isEmpty()) {
+            throw  new UsernameNotFoundException(name + " is not found");
+        }
 
+        return new CompanyDetails(company.get());
     }
 }

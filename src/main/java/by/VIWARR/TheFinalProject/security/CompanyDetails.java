@@ -11,7 +11,7 @@ public class CompanyDetails implements UserDetails {
 
     private final Company company;
 
-    public CompanyDetails(Optional<Company> company) {
+    public CompanyDetails(Company company) {
         this.company = company;
     }
 
