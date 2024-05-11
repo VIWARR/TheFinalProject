@@ -1,6 +1,8 @@
 package by.VIWARR.TheFinalProject.controllers;
 
+import by.VIWARR.TheFinalProject.repositories.CompanyRepository;
 import by.VIWARR.TheFinalProject.security.CompanyDetails;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -12,9 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class CompanyController {
 
-    @GetMapping("/free")
-    public String free() {
-        return "free";
+    @Autowired
+    public CompanyRepository companyRepository;
+
+
+    @GetMapping("/findAll")
+    public String findAll(Model model) {
+        model.addAttribute("companies", companyRepository.findAll());
+
+        return "findAll";
     }
 
     @GetMapping("/getCompany")
