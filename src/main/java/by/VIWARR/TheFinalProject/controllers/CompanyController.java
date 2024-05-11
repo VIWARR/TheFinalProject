@@ -21,6 +21,7 @@ public class CompanyController {
 
     @GetMapping("/findAll")
     public String findAll(Model model) {
+        System.out.println(companyRepository.findAll());
         model.addAttribute("companies", companyRepository.findAll());
 
         return "findAll";
