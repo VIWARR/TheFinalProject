@@ -1,11 +1,10 @@
 package by.VIWARR.TheFinalProject.config;
 
-import by.VIWARR.TheFinalProject.security.CompanyDetailsService;
+import by.VIWARR.TheFinalProject.services.CompanyDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 @Configuration

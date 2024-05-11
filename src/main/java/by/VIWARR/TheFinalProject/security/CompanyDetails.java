@@ -5,12 +5,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public class CompanyDetails implements UserDetails {
 
     private final Company company;
 
-    public CompanyDetails(Company company) {
+    public CompanyDetails(Optional<Company> company) {
         this.company = company;
     }
 
