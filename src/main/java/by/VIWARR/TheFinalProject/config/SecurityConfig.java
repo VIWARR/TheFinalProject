@@ -27,11 +27,6 @@ public class SecurityConfig {
     }
 
     @Bean
-    public CompanyDetailsService companyDetailsService() {
-        return new CompanyDetailsService();
-    }
-
-    @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setUserDetailsService(userDetailsService());
