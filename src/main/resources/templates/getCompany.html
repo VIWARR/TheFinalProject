@@ -7,6 +7,8 @@
 <body>
 <p1 th:text="${company.getName()}"></p1>
 <p2 th:text="${company.getDescription()}"></p2>
-<a href="/logout">выйти</a>
+<form th:action="@{/logout}"th:method="POST">
+	<input type="submit" value="Выйти">
+</form>
 </body>
 </html>
