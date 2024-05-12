@@ -37,8 +37,5 @@ public class AuthController {
         } else {
             return "auth/errorPage";
         }
-
-
-
     }
 }

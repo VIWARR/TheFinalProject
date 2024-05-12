@@ -28,5 +28,6 @@ public class CompanyService {
     public void save(String name, String password, String description) {
         Company company = new Company(name, password, description);
         companyRepository.save(company);
+        System.out.println(company);
     }
 }
