@@ -1,13 +1,12 @@
 package by.VIWARR.TheFinalProject.controllers;
 
-import by.VIWARR.TheFinalProject.repositories.CompanyRepository;
 import by.VIWARR.TheFinalProject.security.CompanyDetails;
+import by.VIWARR.TheFinalProject.services.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CompanyController {
 
     @Autowired
-    public CompanyRepository companyRepository;
+    public CompanyService companyService;
 
 
     @GetMapping("/findAll")
     public String findAll(Model model) {
-        model.addAttribute("companies", companyRepository.findAll());
+        model.addAttribute("companies", companyService.findAll());
 
         return "findAll";
     }
