@@ -38,12 +38,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/loginPage", "/error").permitAll()
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/loginPage",
+                                "/auth/registrationPage", "/auth/performRegistration",
+                                "/error", "/auth/errorPage").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin.loginPage("/auth/loginPage")
                         .loginProcessingUrl("/process_login")
                         .defaultSuccessUrl("/getCompany", true)
                         .failureUrl("/auth/loginPage?error"))
+                .logout(logout -> logout.logoutUrl("/logout")
+                        .logoutSuccessUrl("/auth/loginPage"))
                 .build();
     }
 
