@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/")
 public class CompanyController {
 
-    @Autowired
-    public CompanyService companyService;
+    private final CompanyService companyService;
 
+    @Autowired
+    public CompanyController(CompanyService companyService) {
+        this.companyService = companyService;
+    }
 
     @GetMapping("/findAll")
     public String findAll(Model model) {

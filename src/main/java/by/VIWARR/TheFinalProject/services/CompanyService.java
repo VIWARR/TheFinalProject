@@ -4,6 +4,7 @@ import by.VIWARR.TheFinalProject.models.Company;
 import by.VIWARR.TheFinalProject.repositories.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,8 +14,15 @@ import java.util.Optional;
 @Service
 public class CompanyService {
 
+    private final CompanyRepository companyRepository;
+
+    private final PasswordEncoder passwordEncoder;
+
     @Autowired
-    public CompanyRepository companyRepository;
+    public CompanyService (CompanyRepository c, PasswordEncoder p) {
+        this.companyRepository = c;
+        this.passwordEncoder = p;
+    }
 
     public List<Company> findAll() {
         return companyRepository.findAll(Sort.by("name"));
@@ -26,8 +34,10 @@ public class CompanyService {
 
     @Transactional
     public void save(String name, String password, String description) {
-        Company company = new Company(name, password, description);
+        System.out.println(password);
+        String encoderPassword = passwordEncoder.encode(password);
+        System.out.println(encoderPassword);
+        Company company = new Company(name, encoderPassword, description);
         companyRepository.save(company);
-        System.out.println(company);
     }
 }

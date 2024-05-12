@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/auth")
 public class AuthController {
 
+    private final CompanyService companyService;
+
     @Autowired
-    public CompanyService companyService;
+    public AuthController(CompanyService companyService) {
+        this.companyService = companyService;
+    }
 
     @GetMapping("/loginPage")
     public String loginPage() {
