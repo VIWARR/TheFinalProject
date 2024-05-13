@@ -6,6 +6,8 @@
 </head>
 <body>
 <form method="POST" action="/auth/performRegistration">
+	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+	
 	<label for="companyName">Введите имя компании: </label>
 	<input type="text" name="companyName" id="companyName">
 	<br/>
