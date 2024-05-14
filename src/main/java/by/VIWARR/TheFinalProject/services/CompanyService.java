@@ -34,10 +34,13 @@ public class CompanyService {
 
     @Transactional
     public void save(String name, String password, String description) {
-        System.out.println(password);
         String encoderPassword = passwordEncoder.encode(password);
-        System.out.println(encoderPassword);
         Company company = new Company(name, encoderPassword, description);
+        if (company.getName().equals("MEHADRIN")) {
+            System.out.println("eq");
+            company.setRole("ROLE_ADMIN");
+        }
+
         companyRepository.save(company);
     }
 }

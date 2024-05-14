@@ -22,12 +22,16 @@ public class Company {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "role")
+    private String role;
+
     public Company() {}
 
     public Company(String name, String password, String description) {
         this.name = name;
         this.password = password;
         this.description = description;
+        this.role = "ROLE_USER";
     }
 
     public int getId() {
@@ -62,6 +66,14 @@ public class Company {
         this.description = description;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -82,6 +94,7 @@ public class Company {
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", description='" + description + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 }
