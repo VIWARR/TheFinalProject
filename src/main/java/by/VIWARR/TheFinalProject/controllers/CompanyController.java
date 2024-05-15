@@ -1,15 +1,21 @@
 package by.VIWARR.TheFinalProject.controllers;
 
+import by.VIWARR.TheFinalProject.models.Company;
 import by.VIWARR.TheFinalProject.security.CompanyDetails;
 import by.VIWARR.TheFinalProject.services.AdminService;
 import by.VIWARR.TheFinalProject.services.CompanyService;
+import by.VIWARR.TheFinalProject.util.CompanyErrorResponse;
+import by.VIWARR.TheFinalProject.util.CompanyNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -25,11 +31,16 @@ public class CompanyController {
         this.adminService = adminService;
     }
 
+    @ResponseBody
     @GetMapping("/findAll")
-    public String findAll(Model model) {
-        model.addAttribute("companies", companyService.findAll());
+    public List<Company> findAll() {
+        return companyService.findAll();
+    }
 
-        return "findAll";
+    @ResponseBody
+    @GetMapping("findById/{id}")
+    public Company findById(@PathVariable("id") int id) {
+        return companyService.findById(id);
     }
 
     @GetMapping("/free")
@@ -50,5 +61,15 @@ public class CompanyController {
     public String admin() {
         adminService.doAdminStuff();
         return "admin";
+    }
+
+    @ExceptionHandler
+    private ResponseEntity<CompanyErrorResponse> handleException(CompanyNotFoundException e) {
+        CompanyErrorResponse response = new CompanyErrorResponse(
+                "Пользователь с id не найден",
+                System.currentTimeMillis()
+        );
+
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 }
