@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>AJAX with Spring Boot</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+<h1>AJAX with Spring Boot</h1>
+
+<!-- GET Request -->
+
+<div>
+	<h2>GET Request</h2>
+	<input type="number" id="amount" placeholder="Введите валюту">
+	<button id="sendGet">Send GET</button>
+	<p id="responseGet"></p>
+</div>
+
+<!-- POST Request -->
+<div>
+	<h2>POST Request</h2>
+	<input type="text" id="namePost" placeholder="Enter your name">
+	<button id="sendPost">Send POST</button>
+	<p id="responsePost"></p>
+</div>
+
+<script>
+	$(document).ready(function() {
+		$('#sendGet').click(function() {
+			var name = $('#nameGet').val();
+			$.ajax({
+				url: '/ajaxGet',
+				type: 'GET',
+				data: { name: name },
+				success: function(response) {
+					$('#responseGet').text(response);
+				}
+			});
+		});
+
+		$('#sendPost').click(function() {
+			var name = $('#namePost').val();
+			$.ajax({
+				url: '/ajaxPost',
+				type: 'POST',
+				data: { name: name },
+				success: function(response) {
+					$('#responsePost').text(response);
+				}
+			});
+		});
+	});
+</script>
+
+</body>
+</html>

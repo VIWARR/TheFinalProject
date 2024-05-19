@@ -1,6 +1,8 @@
 package by.VIWARR.TheFinalProject.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 import java.util.Objects;
 
@@ -14,9 +16,12 @@ public class Company {
     private int id;
 
     @Column(name = "name")
+    @NotEmpty(message = "Поле имя не должно быть пустым")
+    @Size(min = 2, max = 30, message = "Имя должно быть от 2 до 30 символов")
     private String name;
 
     @Column(name = "password")
+    @Size(min = 8, max = 100, message = "Пароль должен быть от 8 символов")
     private String password;
 
     @Column(name = "description")

@@ -40,7 +40,8 @@ public class SecurityConfig {
         return http
                 .authorizeHttpRequests(auth -> auth.requestMatchers("/auth/loginPage",
                                 "/auth/registrationPage", "/auth/performRegistration",
-                                "/error", "/auth/errorPage").permitAll()
+                                "/error", "/auth/errorPage", "/ajaxController",
+                                "/ajaxPost", "ajaxGet", "/converter", "/getAmount").permitAll()
                         .anyRequest().authenticated())
                 .formLogin(formLogin -> formLogin.loginPage("/auth/loginPage")
                         .loginProcessingUrl("/process_login")
