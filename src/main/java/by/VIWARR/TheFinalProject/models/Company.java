@@ -30,6 +30,9 @@ public class Company {
     @Column(name = "role")
     private String role;
 
+    @OneToMany(mappedBy = "company")
+    private Tender tenders;
+
     public Company() {}
 
     public Company(String name, String password, String description) {
@@ -79,6 +82,14 @@ public class Company {
         this.role = role;
     }
 
+    public Tender getTenders() {
+        return tenders;
+    }
+
+    public void setTenders(Tender tenders) {
+        this.tenders = tenders;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -99,7 +110,6 @@ public class Company {
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", description='" + description + '\'' +
-                ", role='" + role + '\'' +
                 '}';
     }
 }
